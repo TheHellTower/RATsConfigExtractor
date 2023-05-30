@@ -10,7 +10,7 @@ namespace RATsConfigExtractor
     internal class Program
     {
         private static string yaraRulesFolder = "TYaraHRulesT", filePath = string.Empty;
-        private static void Initialisation()
+        private static void Initialization()
         {
             if (!Directory.Exists(yaraRulesFolder))
             {
@@ -62,7 +62,7 @@ namespace RATsConfigExtractor
         }
         static void Main(string[] args)
         {
-            Initialisation();
+            Initialization();
             while (args.Length == 0 && !File.Exists(filePath))
             {
                 Console.WriteLine("File Path: ");
