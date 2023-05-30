@@ -21,7 +21,7 @@ namespace RATsConfigExtractor
                 //Download Step
             }
         }
-        private static void YaraTest()
+        private static void YaraAndExtract()
         {
             YSInstance YSInstance = new YSInstance();
             
@@ -39,10 +39,7 @@ namespace RATsConfigExtractor
                 
                     YSReport warnings = compiler.GetWarnings();
 
-
-                    string Filename =                                                                                                                           @"C:\Users\TheHellTower_THT\Downloads\Quasar.v1.4.1\Quasar v1.4.1\Client.exe";
-
-                    List<YSMatches> Matches = YSInstance.ScanFile(Filename, rules,externals, 0);
+                    List<YSMatches> Matches = YSInstance.ScanFile(filePath, rules,externals, 0);
 
                     foreach (YSMatches Match in Matches)
                     {
@@ -72,7 +69,7 @@ namespace RATsConfigExtractor
                 filePath = Console.ReadLine().Replace("\"", "");
                 Console.Clear();
             }
-            YaraTest();
+            YaraAndExtract();
 
             Console.ReadLine();
         }
