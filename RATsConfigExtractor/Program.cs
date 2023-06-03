@@ -23,46 +23,51 @@ namespace RATsConfigExtractor
         }
         private static void YaraAndExtract()
         {
-            YSInstance YSInstance = new YSInstance();
-            
-            Dictionary<string, object> externals = new Dictionary<string, object>() { { "filename", string.Empty }, { "filepath", string.Empty }, { "extension", string.Empty } };
-
-            List<string> ruleFilenames = Directory.GetFiles($".\\{yaraRulesFolder}", "*.yar", SearchOption.AllDirectories).ToList();
-
-            using (YSContext context = new YSContext())
+            if (filePath.Contains("\\"))
             {
-                using (YSCompiler compiler = YSInstance.CompileFromFiles(ruleFilenames, externals))
+                YSInstance YSInstance = new YSInstance();
+
+                Dictionary<string, object> externals = new Dictionary<string, object>() { { "filename", string.Empty }, { "filepath", string.Empty }, { "extension", string.Empty } };
+
+                List<string> ruleFilenames = Directory.GetFiles($".\\{yaraRulesFolder}", "*.yar", SearchOption.AllDirectories).ToList();
+
+                using (YSContext context = new YSContext())
                 {
-                    YSRules rules = compiler.GetRules();
-
-                    YSReport errors = compiler.GetErrors();
-                
-                    YSReport warnings = compiler.GetWarnings();
-
-                    List<YSMatches> Matches = YSInstance.ScanFile(filePath, rules,externals, 0);
-
-                    foreach (YSMatches Match in Matches)
+                    using (YSCompiler compiler = YSInstance.CompileFromFiles(ruleFilenames, externals))
                     {
-                        Console.WriteLine($"{Match.Rule.Identifier} Detected !");
+                        YSRules rules = compiler.GetRules();
 
-                        //Console.WriteLine(Encoding.UTF8.GetString(Match.Matches.First().Value.First().Data));
+                        YSReport errors = compiler.GetErrors();
 
-                        Type classType = Type.GetType($"{Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title}.Extractors." + Match.Rule.Identifier);
-                        if (classType == null) return;
-                        object instance = Activator.CreateInstance(classType);
+                        YSReport warnings = compiler.GetWarnings();
 
-                        MethodInfo executeMethod = classType.GetMethod("Execute");
-                        if (executeMethod == null) return;
-                        executeMethod.Invoke(instance, null);
+                        List<YSMatches> Matches = YSInstance.ScanFile(filePath, rules, externals, 0);
 
+                        foreach (YSMatches Match in Matches)
+                        {
+                            Console.WriteLine($"{Match.Rule.Identifier} Detected !");
+
+                            Type classType = Type.GetType($"{Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title}.Extractors." + Match.Rule.Identifier);
+                            if (classType == null) return;
+                            object instance = Activator.CreateInstance(classType);
+
+                            MethodInfo executeMethod = classType.GetMethod("Execute");
+                            if (executeMethod == null) return;
+                            executeMethod.Invoke(instance, new string[] { filePath });
+
+                        }
                     }
+                    //Log errors
                 }
-                //  Log errors
+            } else
+            {
+                Console.WriteLine("Invalid File Path.");
             }
         }
         static void Main(string[] args)
         {
             Initialization();
+            filePath = args[0] ?? string.Empty;
             while (args.Length == 0 && !File.Exists(filePath))
             {
                 Console.WriteLine("File Path: ");
