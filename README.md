@@ -1,6 +1,7 @@
 # RATsConfigExtractor
 
 > **Warning** Don't get fooled by fake repos !
+
 [![CodeFactor](https://www.codefactor.io/repository/github/thehelltower/ratsconfigextractor /badge)](https://www.codefactor.io/repository/github/thehelltower/ratsconfigextractor)
 
 ## 📜 What it does ?
