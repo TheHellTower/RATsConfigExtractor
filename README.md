@@ -19,11 +19,12 @@ This is a RAT(Remote Access Trojan) Config Extractor.
 ## 🎥 Preview
 
 [YouTube video](https://www.youtube.com/watch?v=ID)
+<br>
 [Twitter(Tweet)](https://twitter.com/TheHellTower/status/ID)
 [![](https://i.imgur.com/ID.png)](https://www.youtube.com/watch?v=ID)
 
 ## 🛠️ Support
-- [x] Quasar
+- [x] Quasar (`1.4.1`)
 - If you have an idea of RAT to support, please feel free to [open a issue](https://github.com/TheHellTower/RATsConfigExtractor/issues/new?title=RAT%20Support).
 
 
