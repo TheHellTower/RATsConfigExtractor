@@ -46,13 +46,13 @@ Obviously, bots doesn't count and will be blocked.
     <summary>
         Can I use it on any RAT ?
     </summary>
-    Not really, ref: https://github.com/TheHellTower/RATsConfigExtractor#-support
+    Not really, ref: https://github.com/TheHellTower/RATsConfigExtractor#%EF%B8%8F-support
 </details>
 <details>
     <summary>
         Can I suggest a RAT ?
     </summary>
-    Yes, ref: https://github.com/TheHellTower/RATsConfigExtractor#-support
+    Yes, ref: https://github.com/TheHellTower/RATsConfigExtractor#%EF%B8%8F-support
 </details>
 <details>
     <summary>
