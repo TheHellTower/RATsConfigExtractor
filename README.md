@@ -18,10 +18,10 @@ This is a RAT(Remote Access Trojan) Config Extractor.
 
 ## 🎥 Preview
 
-[YouTube video](https://www.youtube.com/watch?v=ID)
+[YouTube video](https://www.youtube.com/watch?v=zPL3qLoZd0Y)
 <br>
-[Twitter(Tweet)](https://twitter.com/TheHellTower/status/ID)
-[![](https://i.imgur.com/ID.png)](https://www.youtube.com/watch?v=ID)
+[Twitter(Tweet)](https://twitter.com/TheHellTower/status/1665647500894633984)
+[![](https://i.imgur.com/2pSS64m.png)](https://www.youtube.com/watch?v=zPL3qLoZd0Y)
 
 ## 🛠️ Support
 - [x] Quasar (`1.4.1`)
