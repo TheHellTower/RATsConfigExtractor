@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Security.Policy;
 using YaraSharp;
 
 namespace RATsConfigExtractor
@@ -22,7 +21,6 @@ namespace RATsConfigExtractor
                 Console.WriteLine($"It seems that {yaraRulesFolder} folder is missing ! Downloading it for you...");
                 Directory.CreateDirectory(yaraRulesFolder);
                 using (WebClient client = new WebClient())
-                {
                     try
                     {
                         client.DownloadFile("https://raw.githubusercontent.com/TheHellTower/RATsConfigExtractor/rules/TYaraHRulesT.zip", $"{downloadPath}.zip");
@@ -30,14 +28,12 @@ namespace RATsConfigExtractor
                         using (ZipArchive archive = ZipFile.OpenRead($"{downloadPath}.zip"))
                         {
                             foreach (ZipArchiveEntry entry in archive.Entries)
-                            {
                                 try
                                 {
                                     string entryPath = $"{extractPath}{entry.FullName.Replace("/", "\\")}";
                                     entry.ExtractToFile(entryPath, true);
                                 }
                                 catch { }
-                            }
 
                             Console.WriteLine("Extraction completed successfully.");
                         }
@@ -46,7 +42,6 @@ namespace RATsConfigExtractor
                     {
                         Console.WriteLine($"An error occurred: {ex.Message}");
                     }
-                }
             }
         }
         private static void YaraAndExtract()

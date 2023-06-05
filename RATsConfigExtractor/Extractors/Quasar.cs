@@ -73,7 +73,6 @@ namespace RATsConfigExtractor.Extractors
                             }
                         }
                     }
-
                 }
                 catch (Exception ex) { }
         }
