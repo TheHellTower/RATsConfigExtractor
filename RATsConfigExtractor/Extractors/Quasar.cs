@@ -43,7 +43,7 @@ namespace RATsConfigExtractor.Extractors
                 if (instruction.OpCode.OperandType == OperandType.InlineString)
                     Fields.Add(fieldName, instruction.Operand.ToString());
                 else if (instruction.OpCode.OperandType == OperandType.InlineField)
-                    fieldName = instruction.Operand is MemberRef memberRef ? memberRef.Name.ToString() : instruction.Operand.ToString().Substring(fieldName.IndexOf("::") + 2);
+                    fieldName = Utils.GetName(instruction.Operand as IField);
             });
 
             foreach (var prop in Fields)
