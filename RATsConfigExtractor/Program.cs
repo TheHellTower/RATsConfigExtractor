@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Security.Policy;
 using YaraSharp;
 
 namespace RATsConfigExtractor
@@ -12,13 +15,38 @@ namespace RATsConfigExtractor
         private static string yaraRulesFolder = "TYaraHRulesT", filePath = string.Empty;
         private static void Initialization()
         {
-            if (!Directory.Exists(yaraRulesFolder))
+            var extractPath = AppDomain.CurrentDomain.BaseDirectory;
+            var downloadPath = $"{extractPath}\\{yaraRulesFolder}";
+            if (!Directory.Exists(downloadPath))
             {
-                Console.WriteLine($"It seems that {yaraRulesFolder} folder is missing ! Do you want to download ? (y/any)");
-                var key = Console.ReadKey().Key;
-                if(key != ConsoleKey.Y) Environment.Exit(0);
-                Console.Clear();
-                //Download Step
+                Console.WriteLine($"It seems that {yaraRulesFolder} folder is missing ! Downloading it for you...");
+                Directory.CreateDirectory(yaraRulesFolder);
+                using (WebClient client = new WebClient())
+                {
+                    try
+                    {
+                        client.DownloadFile("https://raw.githubusercontent.com/TheHellTower/RATsConfigExtractor/rules/TYaraHRulesT.zip", $"{downloadPath}.zip");
+                        Console.WriteLine("File downloaded successfully.");
+                        using (ZipArchive archive = ZipFile.OpenRead($"{downloadPath}.zip"))
+                        {
+                            foreach (ZipArchiveEntry entry in archive.Entries)
+                            {
+                                try
+                                {
+                                    string entryPath = $"{extractPath}{entry.FullName.Replace("/", "\\")}";
+                                    entry.ExtractToFile(entryPath, true);
+                                }
+                                catch { }
+                            }
+
+                            Console.WriteLine("Extraction completed successfully.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                    }
+                }
             }
         }
         private static void YaraAndExtract()
