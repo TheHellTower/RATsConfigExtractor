@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace RATsConfigExtractor.Extractors
 {
-    internal class Quasar : IRatDetector
+    internal class Quasar : IRATExtractor
     {
         private static ModuleDefMD Module = null;
         private static Assembly ASM = null;

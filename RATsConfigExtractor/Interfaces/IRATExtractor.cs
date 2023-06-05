@@ -1,6 +1,6 @@
 ﻿namespace RATsConfigExtractor.Interfaces
 {
-    internal interface IRatDetector
+    internal interface IRATExtractor
     {
         void Execute(string filePath);
     }
