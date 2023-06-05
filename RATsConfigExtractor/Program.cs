@@ -77,7 +77,6 @@ namespace RATsConfigExtractor
                             MethodInfo executeMethod = classType.GetMethod("Execute");
                             if (executeMethod == null) return;
                             executeMethod.Invoke(instance, new string[] { filePath });
-
                         }
                     }
                     //Log errors
