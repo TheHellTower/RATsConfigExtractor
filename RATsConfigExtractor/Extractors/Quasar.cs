@@ -1,5 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
+using RATsConfigExtractor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Reflection;
 
 namespace RATsConfigExtractor.Extractors
 {
-    internal class Quasar
+    internal class Quasar : IRatDetector
     {
         private static ModuleDefMD Module = null;
         private static Assembly ASM = null;
@@ -17,7 +18,7 @@ namespace RATsConfigExtractor.Extractors
 
         static Dictionary<String, object> Fields = new Dictionary<String, object>();
 
-        public static void Execute(string filePath)
+        public void Execute(string filePath)
         {
             Module = ModuleDefMD.Load(filePath);
             ASM = Assembly.LoadFrom(filePath);
